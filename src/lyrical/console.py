@@ -21,7 +21,7 @@ def main():
 @main.command('search', short_help="Search the Musicbrainz database by artist.")
 @click.option('--name', prompt='Artist Name', help='The artist to search for')
 def search(name):
-    with requests.get(SEARCH_API_URL.format(query=quote(name, safe=''))) as response:
+    with requests.get(SEARCH_API_URL.format(query=quote(name, safe='')),headers={'User-Agent': USER_AGENT}) as response:
         response.raise_for_status()
         data = response.json()
         
