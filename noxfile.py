@@ -4,8 +4,9 @@ import tempfile
 import nox
 
 
-nox.options.sessions = "lint", "safety", "tests"
+nox.options.sessions = "lint", "mypy", "safety", "tests"
 locations = "src", "tests", "noxfile.py"
+package = "lyrical"
 
 
 def install_with_constraints(session, *args, **kwargs):
@@ -31,6 +32,14 @@ def tests(session):
     session.run("pytest", *args)
 
 
+@nox.session(python=["3.8"])
+def typeguard(session):
+    args = session.posargs or ["-m", "not e2e"]
+    session.run("poetry", "install", "--no-dev", external=True)
+    install_with_constraints(session, "pytest", "pytest-mock", "typeguard")
+    session.run("pytest", f"--typeguard-packages={package}", *args)
+
+
 @nox.session(python="3.8")
 def black(session):
     args = session.posargs or locations
@@ -44,6 +53,7 @@ def lint(session):
     install_with_constraints(
         session,
         "flake8",
+        "flake8-annotations",
         "flake8-bandit",
         "flake8-black",
         "flake8-bugbear",
@@ -66,3 +76,10 @@ def safety(session):
         )
         install_with_constraints(session, "safety")
         session.run("safety", "check", f"--file={requirements.name}", "--full-report")
+
+
+@nox.session(python=["3.8"])
+def mypy(session):
+    args = session.posargs or locations
+    install_with_constraints(session, "mypy")
+    session.run("mypy", *args)
