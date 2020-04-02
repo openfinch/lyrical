@@ -1,4 +1,5 @@
 # src/lyrical/musicbrainz.py
+"""Client for the Musicbrainz REST API."""
 from dataclasses import dataclass
 
 import click
@@ -14,6 +15,17 @@ SEARCH_API_URL: str = "https://musicbrainz.org/ws/2/artist/?query={query}&fmt=js
 
 @dataclass
 class Artist:
+    """Artist resource.
+
+    Attributes:
+        id: Unique id of artist in Musicbrainz.
+        name: Name of the artist.
+        sort_name: Sort-alphabetised name of the artist.
+        established: Year the artist was established.
+        hometown: Hometown of the artist.
+        country: Home country of the artist.
+    """
+
     id: str
     name: str
     sort_name: str
@@ -26,6 +38,26 @@ artist_schema = desert.schema(Artist, meta={"unknown": marshmallow.EXCLUDE})
 
 
 def search(name: str) -> Artist:
+    """Search for an artist.
+
+    Performs a GET request to the /artist/?query={query} endpoint.
+
+    Args:
+        name: The url-encoded name of the artist
+
+    Returns:
+        An Artist resource.
+
+    Raises:
+        ClickException: The HTTP request failed or the HTTP response
+            contained an invalid body.
+
+    Example:
+        >>> from lyrical import musicbrainz
+        >>> artist = musicbrainz.search(name="The%20Cure")
+        >>> artist.name
+        "The Cure"
+    """
     try:
         with requests.get(
             SEARCH_API_URL.format(query=name), headers={"User-Agent": USER_AGENT}

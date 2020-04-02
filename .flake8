@@ -1,11 +1,13 @@
 # .flake8
 [flake8]
-select = ANN,B,B9,BLK,C,E,F,I,S,W
+select = ANN,B,B9,BLK,C,D,DAR,E,F,I,S,W
+
 ignore = E203,E501,W503
 per-file-ignores =
-    tests/*:S101,ANN
+    tests/*:S101,ANN,D
     noxfile.py:ANN
 max-line-length = 80
 
+docstring-convention = google
 import-order-style = google
 application-import-names = lyrical,tests

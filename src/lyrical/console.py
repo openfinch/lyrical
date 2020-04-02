@@ -1,4 +1,5 @@
 # src/lyrical/console.py
+"""Command-line interface."""
 import textwrap
 from urllib.parse import quote
 
@@ -20,6 +21,7 @@ def main() -> None:
 @main.command("search", short_help="Search the Musicbrainz database by artist.")
 @click.option("--name", prompt="Artist Name", help="The artist to search for")
 def search(name: str) -> None:
+    """Search for an artist."""
     data = musicbrainz.search(quote(name))
 
     extract: str = f"{data.name}, {data.established} ({data.hometown}, {data.country})"
