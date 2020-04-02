@@ -1,4 +1,4 @@
-# src/hypermodern_python/console.py
+# src/lyrical/console.py
 import json
 import textwrap
 from urllib.parse import quote

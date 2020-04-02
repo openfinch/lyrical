@@ -1,3 +1,4 @@
+# src/lyrical/musicbrainz.py
 import click
 import requests
 

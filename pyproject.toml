@@ -21,6 +21,7 @@ requests = "^2.23.0"
 pytest = "^5.4.1"
 coverage = {extras = ["toml"], version = "^5.0.4"}
 pytest-cov = "^2.8.1"
+pytest-mock = "^3.0.0"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
