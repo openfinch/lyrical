@@ -25,13 +25,13 @@ def main() -> None:
     "--tracklist",
     is_flag=True,
     default=False,
-    prompt="Should Lyrical fetch a tracklist for this artist?",
+    help="Should Lyrical fetch a tracklist for this artist?",
 )
 @click.option(
     "--deduplicate",
     is_flag=True,
     default=False,
-    prompt="Should Lyrical deduplicate the tracklist?",
+    help="Should Lyrical deduplicate the tracklist?",
 )
 def search(name: str, tracklist: bool = False, deduplicate: bool = False) -> None:
     """Search for an artist."""
@@ -54,14 +54,14 @@ def search(name: str, tracklist: bool = False, deduplicate: bool = False) -> Non
 @click.option("--name", prompt="Artist Name", help="The artist to search for")
 @click.option(
     "--analysis",
-    prompt="Which analysis should Lyrical run? {all, wordcount}",
+    help="Which analysis should Lyrical run? {all, wordcount}",
     default="all",
 )
 @click.option(
     "--deduplicate",
     is_flag=True,
     default=False,
-    prompt="Should Lyrical deduplicate the tracklist?",
+    help="Should Lyrical deduplicate the tracklist?",
 )
 def analyse(name: str, analysis: str = "all", deduplicate: bool = False) -> None:
     """Search for an artist."""

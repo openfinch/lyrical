@@ -55,7 +55,7 @@ def build_corpus(artist: str, tracklist: List) -> List[LyricsCorpus]:
 
     """
     urls = []
-    batch_size = 1
+    batch_size = 10
     corpus = []
 
     try:
