@@ -18,12 +18,13 @@ def mock_musicbrainz_search(mocker):
 def test_main_succeeds(runner):
     result = runner.invoke(console.main)
     assert result.exit_code == 0
-    assert "Usage: main [OPTIONS] COMMAND [ARGS]" in result.output
+    assert "Usage:" in result.output
 
 
 def test_main_returns_search_feature_helper(runner):
     result = runner.invoke(console.main)
-    assert "search  Search the Musicbrainz database by artist." in result.output
+    assert "search" in result.output
+    assert "analyse" in result.output
 
 
 def test_search_succeeds_using_mock_simple(runner, mock_requests_get):

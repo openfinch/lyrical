@@ -6,6 +6,8 @@ ignore = E203,E501,W503
 per-file-ignores =
     tests/*:S101,ANN,D
     noxfile.py:ANN
+    src/lyrical/musicbrainz.py:B950
+    src/lyrical/console.py:B950
 max-line-length = 80
 
 docstring-convention = google
