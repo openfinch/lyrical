@@ -105,6 +105,8 @@ Initially I had intended to run the request-loop for recordings as a multi-worke
 
 I have opted to keep the futures-based code, and it's associated retry logic, in-place should we move to a higher rate limit. I am unable to find an effective way to speed this process up without breaking the Musicbrainz terms of use.
 
+Note: The command used to test this no longer exists and has been merged into Search, it only exists for development.
+
 ### Lyrics.ovh
 
 We can see, that by adding the same concurrency logic to the Lyrics.ovh API request, we see a significant improvement:
@@ -123,7 +125,10 @@ This test was run with both a small corpus (`Sunn O)))`) and a larger corpus (`T
 
 ## Ideas for Improvements <a name = "improvements"></a>
  - **MED** Move all presentation logic into a single module
+ - **MED** Add an import/export function for corpuses
  - **MED** Expose request batch size as a configurable parameter
+ - **MED** Add a debug flag and logging output for troubleshooting
+ - **MED** Move wordcount test to use `unittest.mock` rather than stdout redirection
  - **LOW** Add type annotations to tests/ and noxfile.py
  - **LOW** Add docstrings to test suite.
  - **LOW** Move to a string-table system for a11y.

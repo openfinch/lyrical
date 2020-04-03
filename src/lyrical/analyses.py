@@ -39,25 +39,16 @@ def tokenise(corpus: List[LyricsCorpus]) -> List[TokenisedCorpus]:
     Returns:
         A TokenisedCorpus resource
 
-    Raises:
-        ClickException: The HTTP request failed or the HTTP response
-            contained an invalid body.
-
     """
     click.echo("Tokenising lyrics corpus")
     words = []
     for song in corpus:
         tokens = song.lyrics.split()
-
-        try:
-            words.append(
-                tokens_schema.load(
-                    {"title": song.title, "artist": song.artist, "tokens": tokens}
-                )
+        words.append(
+            tokens_schema.load(
+                {"title": song.title, "artist": song.artist, "tokens": tokens}
             )
-        except (marshmallow.ValidationError) as error:
-            message: str = str(error)
-            raise click.ClickException(message)
+        )
 
     return words
 
