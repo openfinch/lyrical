@@ -87,6 +87,4 @@ def analyse(name: str, analysis: str = "all", deduplicate: bool = False) -> None
 
     if analysis == "all" or analysis == "wordcount":
         tokenised_corpus = analyses.tokenise(lyric_corpus)
-
-    if analysis == "all" or analysis == "wordcount":
         analyses.wordcount(tokenised_corpus)
